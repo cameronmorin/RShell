@@ -4,14 +4,30 @@
 using namespace std;
 
 void shell::run() {
+
+    Base* root = 0;
+
+    cout << "$";
+    getline(cin, UserInput);
+
+    infixToPostfix(UserInput);
+
+    root = buildTree(UserInput);
+
+    root->evaluate();
+
+
+
+
+
     return;
 }
 
-string shell::infixToPostfix(string usrCommands) {
-    string blah = "blah";
-    return blah;
+void shell::infixToPostfix(string& usrCommands) {
+
 }
 
-void shell::buildTree(string PostUsrCommands) {
-    return;
+Base* shell::buildTree(string PostUsrCommands) {
+    Base* rocket = 0;
+    return rocket;
 }

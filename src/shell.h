@@ -1,6 +1,7 @@
 #ifndef __SHELL_H__
 #define __SHELL_H__
 #include<iostream>
+#include "Base.h"
 using namespace std;
 
 class shell {
@@ -20,12 +21,13 @@ class shell {
 
         // infixToPostfix() parses the userinput to the correct notation.
         // Allows the input to be built into a tree
-        string infixToPostfix(string usrCommands);
+        void infixToPostfix(string& usrCommands);
 
         // buildTree() builds the arithemtic tree using the composite class
         // called connectors and leafs beign the command class which will all
         // be under the umbrella of the Base class
-        void buildTree(string postUsrCommands);
+        // returns pointer to root of the tree
+        Base* buildTree(string postUsrCommands);
 
 };
 
