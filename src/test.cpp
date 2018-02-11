@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "Base.h"
 #include <iostream>
 
 using namespace std;

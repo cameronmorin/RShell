@@ -33,7 +33,6 @@ void shell::convertInput(string UserInput, vector<Base*>& inputVector) {
 }
 
 
-
 Base* shell::buildTree(vector<Base*> inputVector) {
     Base* rocket = 0;
     return rocket;

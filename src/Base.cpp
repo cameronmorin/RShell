@@ -37,3 +37,13 @@ void ANDConnector::evaluate() {
     rhs->evaluate();
     return;
 }
+
+void command::evaluate() {
+    // FIXME
+    return;
+}
+
+bool command::canExecute() {
+    // FIXME
+    return true;
+}
