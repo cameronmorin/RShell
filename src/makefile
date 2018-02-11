@@ -1,6 +1,6 @@
 CC = g++
 CC_FLAGS = -Wall -Werror -ansi -pedantic
-OBJECTS = test.cpp shell.cpp
+OBJECTS = test.cpp shell.cpp Base.cpp
 
 all: $(OBJECTS)
 	$(CC) $(CC_FLAGS) $(OBJECTS) -o shell

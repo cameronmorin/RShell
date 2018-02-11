@@ -2,6 +2,7 @@
 #define __SHELL_H__
 #include<iostream>
 #include "Base.h"
+#include <vector>
 using namespace std;
 
 class shell {
@@ -10,24 +11,28 @@ class shell {
         // user string for list of commands
         string UserInput;
 
+        // vector containing infix order of commands and operators
+        vector<Base*> inputVector;
+
     public:
 
         // constructor
-        shell() : UserInput() { }
+        shell() : UserInput(), inputVector() { }
 
         // run() will contain the loop for running the command prompt 
         //  and using all other functionality from other classes
         void run();
 
-        // infixToPostfix() parses the userinput to the correct notation.
-        // Allows the input to be built into a tree
-        void infixToPostfix(string& usrCommands);
+        // takes user input and parses individual commands and operators
+        // creates base pointers from them and places them into a vector
+        void convertInput(string UserInput, vector<Base*>& inputVector);
 
-        // buildTree() builds the arithemtic tree using the composite class
-        // called connectors and leafs beign the command class which will all
-        // be under the umbrella of the Base class
+        // converts a infix notation vector of Base* into postfix notation
+        void convertToPostfix(vector<Base*>& inputVector);
+
+        // uses Base* vector to implement an arithematic style tree
         // returns pointer to root of the tree
-        Base* buildTree(string postUsrCommands);
+        Base* buildTree(vector<Base*> inputVector);
 
 };
 

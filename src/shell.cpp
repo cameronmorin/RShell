@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <stack>
 #include <iostream>
 
 using namespace std;
@@ -7,27 +8,33 @@ void shell::run() {
 
     Base* root = 0;
 
-    cout << "$";
+    cout << "$ ";
     getline(cin, UserInput);
 
-    infixToPostfix(UserInput);
+    convertInput(UserInput, inputVector);
 
-    root = buildTree(UserInput);
+    convertToPostfix(inputVector);
+
+    root = buildTree(inputVector);
 
     root->evaluate();
-
-
-
-
 
     return;
 }
 
-void shell::infixToPostfix(string& usrCommands) {
+void shell::convertToPostfix(vector<Base*>& inputVector) {
+    // FIXME
 
 }
 
-Base* shell::buildTree(string PostUsrCommands) {
+void shell::convertInput(string UserInput, vector<Base*>& inputVector) {
+    // FIXME
+
+}
+
+
+
+Base* shell::buildTree(vector<Base*> inputVector) {
     Base* rocket = 0;
     return rocket;
 }
