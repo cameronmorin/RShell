@@ -37,3 +37,9 @@ Base* shell::buildTree(vector<Base*> inputVector) {
     Base* rocket = 0;
     return rocket;
 }
+
+
+int shell::priority(Base* connector) {
+	//FIXME
+	return 0;
+}

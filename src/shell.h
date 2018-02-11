@@ -33,7 +33,10 @@ class shell {
         // uses Base* vector to implement an arithematic style tree
         // returns pointer to root of the tree
         Base* buildTree(vector<Base*> inputVector);
-
+		
+		//used in the convertToPostfix function in order to determine 
+		//the "priority" of the current connector
+		int priority(Base* connector);
 };
 
 #endif // __SHELL_H__
