@@ -16,6 +16,10 @@ class Base {
 
         // check if it is valid to evaluate
         virtual bool canExecute() = 0;
+
+		// returns the string inside of each
+		// base node e.g. "command", ";", etc.
+		virtual string getData() = 0;
 };
 
 class command : public Base {
@@ -33,6 +37,7 @@ class command : public Base {
 
     bool canExecute();
 
+	string getData() { return commandString;}
 };
 
 class semiColonConnector : public Base {
@@ -46,6 +51,8 @@ class semiColonConnector : public Base {
         bool isConnector() { return true;}
 
         bool canExecute();
+
+		string getData() { return ";";}
 };
 
 class orConnector : public Base {
@@ -59,6 +66,8 @@ class orConnector : public Base {
         bool isConnector() { return true;}
 
         bool canExecute();
+
+		string getData() { return "||";}
 };
 
 class ANDConnector : public Base {
@@ -72,6 +81,8 @@ class ANDConnector : public Base {
         bool isConnector() { return true;}
 
         bool canExecute();
+
+		string getData() { return "&&";}
 };
 
 #endif // __BASE_H__
