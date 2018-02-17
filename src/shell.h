@@ -11,13 +11,17 @@ class shell {
         // user string for list of commands
         string UserInput;
 
-        // vector containing infix order of commands and operators
+        // parsed commands and connectors go here
+        vector<string> commands;
+
+        // All commands as Base* not sure if we need it yet
         vector<Base*> inputVector;
+
 
     public:
 
         // constructor
-        shell() : UserInput(), inputVector() { }
+        shell() : UserInput(), commands() { }
 
         // run() will contain the loop for running the command prompt 
         //  and using all other functionality from other classes
@@ -25,7 +29,7 @@ class shell {
 
         // takes user input and parses individual commands and operators
         // creates base pointers from them and places them into a vector
-        void convertInput(string UserInput, vector<Base*>& inputVector);
+        void convertInput(string UserInput, vector<string>& commands);
 
         // converts a infix notation vector of Base* into postfix notation
         void convertToPostfix(vector<Base*>& inputVector);
