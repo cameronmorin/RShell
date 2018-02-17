@@ -1,15 +1,15 @@
 CC = g++
-CC_FLAGS = -Wall -Werror -ansi -pedantic
+C11 = -std=c++11
+CC_FLAGS = -Wall -Werror -pedantic
 OBJECTS = test.cpp shell.cpp Base.cpp
 
 all: $(OBJECTS)
-	$(CC) $(CC_FLAGS) $(OBJECTS) -o shell
+	$(CC) $(C11) $(CC_FLAGS) $(OBJECTS) -o shell
 
 
-rshell: $($OBJECTS)
-	$(CC) $(CC_FLAGS) $(OBJECTS) -o shell
+rshell: $(OBJECTS)
+	$(CC) $(C11) $(CC_FLAGS) $(OBJECTS) -o shell
 
-
-test.o : shell.h
-shell.o : shell.h
+clean: $(OBJECTS)
+	rm -f test.o shell.o Base.o
 
