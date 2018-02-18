@@ -19,7 +19,7 @@ class Base {
 
 		// returns the string inside of each
 		// base node e.g. "command", ";", etc.
-		virtual string getData() = 0;
+		virtual int getPriority() = 0;
 };
 
 class command : public Base {
@@ -37,7 +37,7 @@ class command : public Base {
 
     bool canExecute();
 
-	string getData() { return commandString;}
+	int getPriority() { return 0;}
 };
 
 class semiColonConnector : public Base {
@@ -52,7 +52,7 @@ class semiColonConnector : public Base {
 
         bool canExecute();
 
-		string getData() { return ";";}
+		int getPriority() { return 2;}
 };
 
 class orConnector : public Base {
@@ -67,7 +67,7 @@ class orConnector : public Base {
 
         bool canExecute();
 
-		string getData() { return "||";}
+		int getPriority() { return 3;}
 };
 
 class ANDConnector : public Base {
@@ -82,7 +82,7 @@ class ANDConnector : public Base {
 
         bool canExecute();
 
-		string getData() { return "&&";}
+		int getPriority() { return 3;}
 };
 
 #endif // __BASE_H__

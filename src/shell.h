@@ -36,7 +36,7 @@ class shell {
 		
 		//used in the convertToPostfix function in order to determine 
 		//the "priority" of the current connector
-		int priority(Base* connector);
+		//int priority(Base* connector);
 };
 
 #endif // __SHELL_H__
