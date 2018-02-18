@@ -20,6 +20,12 @@ class Base {
 		// returns the string inside of each
 		// base node e.g. "command", ";", etc.
 		virtual int getPriority() = 0;
+		
+		//Set the right child for certain classes
+		virtual void setRightChild(Base* right) = 0;
+
+		//Set the left child for certain classes
+		virtual void setLeftChild(Base* left) = 0;
 };
 
 class command : public Base {
@@ -38,6 +44,10 @@ class command : public Base {
     bool canExecute();
 
 	int getPriority() { return 0;}
+
+	void setLeftChild(Base* left);
+
+	void setRightChild(Base* right);
 };
 
 class semiColonConnector : public Base {
@@ -53,6 +63,10 @@ class semiColonConnector : public Base {
         bool canExecute();
 
 		int getPriority() { return 2;}
+
+		void setLeftChild(Base* left);
+
+		void setRightChild(Base* right);
 };
 
 class orConnector : public Base {
@@ -68,6 +82,10 @@ class orConnector : public Base {
         bool canExecute();
 
 		int getPriority() { return 3;}
+	
+		void setRightChild(Base* right);
+
+		void setLeftChild(Base* left);
 };
 
 class ANDConnector : public Base {
@@ -83,6 +101,10 @@ class ANDConnector : public Base {
         bool canExecute();
 
 		int getPriority() { return 3;}
+
+		void setRightChild(Base* right);
+
+		void setLeftChild(Base* left);
 };
 
 #endif // __BASE_H__

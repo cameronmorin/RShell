@@ -93,9 +93,9 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 			Tree.push(reversePolish.at(j));
 		}
 		else {
-			reversePolish.at(j)->rhs = Tree.top();
+			reversePolish.at(j)->setRightChild(Tree.top());
 			Tree.pop();
-			reversePolish.at(j)->lhs = Tree.top();
+			reversePolish.at(j)->setLeftChild(Tree.top());
 			Tree.pop();
 			Tree.push(reversePolish.at(j));
 		}
