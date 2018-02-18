@@ -44,7 +44,7 @@ void shell::convertInput(string UserInput, vector<string>& commands) {
     }
 
     // reads through vector to eliminate comments from executions
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned i = 0; i < v.size(); ++i) {
         if (v.at(i) == "#") {
             break;
         }
@@ -68,7 +68,7 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 	}
 
 
-	for (int i = 0; i < inputVector.size(); ++i) {
+	for (unsigned i = 0; i < inputVector.size(); ++i) {
 		//If connector, evaluate. Else, push_back reversePolish
 		if (inputVector.at(i)->isConnector()) {
 			//Priority nonsense
@@ -88,16 +88,16 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 	//Now build the tree
 	stack<Base*> Tree;
 	
-	for (int j = 0; j < reversePolish.size(); ++j) {
+	for (unsigned j = 0; j < reversePolish.size(); ++j) {
 		if (!reversePolish.at(j)->isConnector()) {
-			Tree.push(reversePolish.at(j);
+			Tree.push(reversePolish.at(j));
 		}
 		else {
 			reversePolish.at(j)->rhs = Tree.top();
 			Tree.pop();
 			reversePolish.at(j)->lhs = Tree.top();
 			Tree.pop();
-			Tree.push(reversePolish.at(j);
+			Tree.push(reversePolish.at(j));
 		}
 	}	
 	return Tree.top();	
