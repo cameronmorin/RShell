@@ -29,7 +29,8 @@ class shell {
 
         // takes user input and parses individual commands and operators
         // creates base pointers from them and places them into a vector
-        void convertInput(string UserInput, vector<string>& commands);
+        void convertInput(string UserInput, vector<string>& commands,
+                                    vector<Base*>& inputVector);
 
         // uses Base* vector to implement an arithematic style tree
         // returns pointer to root of the tree

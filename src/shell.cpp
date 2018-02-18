@@ -13,9 +13,7 @@ void shell::run() {
     cout << "$ ";
     getline(cin, UserInput);
 
-    convertInput(UserInput, commands);
-
-    //convertToPostfix(inputVector);
+    convertInput(UserInput, commands, inputVector);
 
     //root = buildTree(inputVector);
 
@@ -24,7 +22,8 @@ void shell::run() {
     return;
 }
 
-void shell::convertInput(string UserInput, vector<string>& commands) {
+void shell::convertInput(string UserInput, vector<string>& commands, 
+                            vector<Base*>& inputVector) {
 
     vector<string> v;
     // regular expression to parse through the user input
@@ -47,7 +46,35 @@ void shell::convertInput(string UserInput, vector<string>& commands) {
             commands.push_back(v.at(i));
         }
     }
-    
+
+    // go through and convert all inputs into base pointers
+    for (unsigned i = 0; i < commands.size(); ++i) {
+        if (commands.at(i) == "||") {
+            orConnector* Or = new orConnector();
+            inputVector.push_back(Or);
+        }
+        else if (commands.at(i) == "&&") {
+            ANDConnector* AND = new ANDConnector();
+            inputVector.push_back(AND);
+        }
+        else if (commands.at(i) == ";") {
+            semiColonConnector* semi = new semiColonConnector();
+            inputVector.push_back(semi);
+        }
+        else {
+            command* cmd = new command(commands.at(i));
+            inputVector.push_back(cmd);
+        }
+    }
+    // testing if it pushed onto it
+    for (unsigned i = 0; i < inputVector.size(); ++i) {
+        if (inputVector.at(i)->isConnector()) {
+            cout << "its a connector" << endl;
+        }
+        else {
+            cout << "its a command" << endl;
+        }
+    }
 }
 
 
