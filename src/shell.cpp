@@ -24,11 +24,6 @@ void shell::run() {
     return;
 }
 
-void shell::convertToPostfix(vector<Base*>& inputVector) {
-    // FIXME
-
-}
-
 void shell::convertInput(string UserInput, vector<string>& commands) {
 
     vector<string> v;
@@ -52,8 +47,7 @@ void shell::convertInput(string UserInput, vector<string>& commands) {
             commands.push_back(v.at(i));
         }
     }
-
-
+    
 }
 
 

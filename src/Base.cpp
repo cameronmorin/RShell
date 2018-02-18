@@ -48,48 +48,32 @@ void ANDConnector::setRightChild(Base* right) {
 
 
 ///////////////////////////////////////////////////////////////
-bool semiColonConnector::canExecute() {
-    // FIXME
-    return true;
-}
 
-void semiColonConnector::evaluate() {
+bool semiColonConnector::evaluate() {
     // FIXME
     lhs->evaluate();
     rhs->evaluate();
-    return;
-}
-
-bool orConnector::canExecute() {
-    // FIXME
     return true;
 }
 
-void orConnector::evaluate() {
+
+bool orConnector::evaluate() {
     // FIXME
     lhs->evaluate();
     rhs->evaluate();
-    return;
-}
-
-bool ANDConnector::canExecute() {
-    // FIXME
     return true;
 }
 
-void ANDConnector::evaluate() {
+
+bool ANDConnector::evaluate() {
     // FIXME
     lhs->evaluate();
     rhs->evaluate();
-    return;
+    return true;
 }
 
-void command::evaluate() {
-    // FIXME
-    return;
-}
-
-bool command::canExecute() {
+bool command::evaluate() {
     // FIXME
     return true;
 }
+

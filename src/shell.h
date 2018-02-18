@@ -31,9 +31,6 @@ class shell {
         // creates base pointers from them and places them into a vector
         void convertInput(string UserInput, vector<string>& commands);
 
-        // converts a infix notation vector of Base* into postfix notation
-        void convertToPostfix(vector<Base*>& inputVector);
-
         // uses Base* vector to implement an arithematic style tree
         // returns pointer to root of the tree
         Base* buildTree(vector<Base*> inputVector);
