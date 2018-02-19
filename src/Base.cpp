@@ -98,11 +98,15 @@ int ANDConnector::evaluate() {
 
 int command::evaluate() {
 
+    //cout << "at the evaluate stage" << endl;
+
     vector<string> v = parseCommand(commandString);
 
     if (commandString == "exit") {
         return -1;
     }
+
+    //cout << "not exit sounds good" << endl;
 
     pid_t pid = fork();
     pid_t w;
@@ -117,12 +121,13 @@ int command::evaluate() {
     }
 
     if (pid < 0) {
-        cout << "forking child failed" << endl;
+        perror("forking child failed");
         exit(1);
     }
     else if (pid == 0) {
         if (execvp(args[0], args) < 0) {
-            cout << "-bash: " << args[0] << ": command not found" << endl;
+            perror("execution failure");
+            // cout << "-bash: " << args[0] << ": command not found" << endl;
             exit(1);
         }
     }
@@ -130,7 +135,7 @@ int command::evaluate() {
         w = waitpid(pid, &status, 0);
 
         if (w == -1) {
-            cout << "Issue with waitpid" << endl;
+            perror("issue with waitpid");
             exit(EXIT_FAILURE);
         }
         if (WEXITSTATUS(status) == 0) {
@@ -150,6 +155,12 @@ vector<string> command::parseCommand(string s) {
         v.push_back(*it);
         ++it;
     }
+
+    // cout << "contents of parsed command" << endl;
+    // for (unsigned i = 0; i < v.size(); ++i) {
+    //     cout << v.at(i) << endl;
+    // }
+
 
     return v;
 }
