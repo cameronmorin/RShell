@@ -4,6 +4,8 @@
 #include <string>
 #include <regex>
 #include <stack>
+#include <iterator>
+#include <boost/regex.hpp>
 
 using namespace std;
 
