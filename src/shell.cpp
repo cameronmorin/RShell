@@ -103,22 +103,24 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 			reversePolish.push_back(inputVector.at(i));
 		}
 	}
+	
+	while(!connectorStack.empty()) {
+		reversePolish.push_back(connectorStack.top());
+		connectorStack.pop();
+	}
 
 	//ReversePolishNotation Vector built above
 	//Now build the tree
 	stack<Base*> Tree;
 	
 	for (unsigned j = 0; j < reversePolish.size(); ++j) {
-		if (!reversePolish.at(j)->isConnector()) {
-			Tree.push(reversePolish.at(j));
-		}
-		else {
+		if (reversePolish.at(j)->isConnector()) {
 			reversePolish.at(j)->setRightChild(Tree.top());
 			Tree.pop();
 			reversePolish.at(j)->setLeftChild(Tree.top());
 			Tree.pop();
-			Tree.push(reversePolish.at(j));
 		}
+		Tree.push(reversePolish.at(j));
 	}	
 	return Tree.top();	
 }
