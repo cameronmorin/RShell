@@ -31,8 +31,7 @@ void shell::run() {
     return;
 }
 
-void shell::convertInput(string UserInput, vector<string>& commands, 
-                            vector<Base*>& inputVector) {
+void shell::convertInput(string UserInput, vector<string>& commands, vector<Base*>& inputVector) {
 
     vector<string> v;
     // regular expression to parse through the user input

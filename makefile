@@ -5,19 +5,20 @@ EXECUTABLE = rshell
 SOURCEDIR = src
 BUILDER = bin
 
-OBJECTS = test.cpp Base.cpp shell.cpp
+OBJECTS = test.o shell.o Base.o
+SOURCES = src/test.cpp src/shell.cpp src/Base.cpp
 
 
-all: $(OBJECTS)
+all: $(SOURCES)
 	mkdir -p $(BUILDER)
-	$(CC) $(CC_FLAGS) $(OBJECTS) -o $(BUILDER)/$(EXECUTABLE)
+	$(CC) $(CC_FLAGS) $(SOURCES) -o $(BUILDER)/$(EXECUTABLE)
 
 
-rshell: $(OBJECTS)
+rshell: $(SOURCES)
 	mkdir -p $(BUILDER)
-	$(CC) $(CC_FLAGS) $(OBJECTS) -o $(BUILDER)/$(EXECUTABLE)
+	$(CC) $(CC_FLAGS) $(SOURCES) -o $(BUILDER)/$(EXECUTABLE)
 
-clean: $(OBJECTS)
+clean: $(SOURCES)
 	rm -f $(EXECUTABLE) $(OBJECTS)
 	rm -rf $(BUILDER)
-
+	
