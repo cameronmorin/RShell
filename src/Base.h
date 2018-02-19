@@ -9,6 +9,8 @@ class Base {
         /* Constructors */
         Base() {}
 
+        virtual ~Base() {}
+
         /* Pure Virtual Functions */
         virtual int evaluate() = 0;
 
@@ -35,6 +37,9 @@ class command : public Base {
     command() : commandString() { }
     command(string cmd) : commandString(cmd) { }
 
+    // destructors
+    //~command();
+
     int evaluate();
 
     bool isConnector() { return false;}
@@ -57,6 +62,9 @@ class semiColonConnector : public Base {
         Base* rhs;
 
     public:
+        // destructors
+        //~semiColonConnector();
+
         int evaluate();
 
         bool isConnector() { return true;}
@@ -74,6 +82,9 @@ class orConnector : public Base {
         Base* rhs;
 
     public:
+        // destructors
+        //~orConnector();
+
         int evaluate();
 
         bool isConnector() { return true;}
@@ -91,6 +102,9 @@ class ANDConnector : public Base {
         Base* rhs;
 
     public:
+        // destructors
+        //~ANDConnector();
+
         int evaluate();
 
         bool isConnector() { return true;}

@@ -9,11 +9,24 @@
 
 using namespace std;
 
+
+shell::~shell() {
+
+    if (inputVector.empty()) {
+        return;
+    }
+
+    for (unsigned i = 0; i < inputVector.size(); ++i) {
+        Base* ptr = inputVector.at(i);
+        delete ptr;
+        ptr = 0;
+    }
+}
+
 void shell::run() {
 
-    Base* root = 0;
-
     while (true) {
+        Base* root = 0;
         cout << "$ ";
         getline(cin, UserInput);
 
@@ -25,6 +38,7 @@ void shell::run() {
             cout << "exiting shell" << endl;
             return;
         }
+        delete this;
     }
 
     return;

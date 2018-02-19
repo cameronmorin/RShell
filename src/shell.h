@@ -23,6 +23,9 @@ class shell {
         // constructor
         shell() : UserInput(), commands() { }
 
+        // destructor
+        ~shell();
+
         // run() will contain the loop for running the command prompt 
         //  and using all other functionality from other classes
         void run();

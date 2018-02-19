@@ -9,6 +9,14 @@
 
 using namespace std;
 
+// not sure how it defaulted to working but this is what works
+//command::~command() {}
+//orConnector::~orConnector() {}
+//semiColonConnector::~semiColonConnector() {}
+//ANDConnector::~ANDConnector() {}
+
+
+
 void command::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a command" << endl;
 	return;
