@@ -56,39 +56,53 @@ void ANDConnector::setRightChild(Base* right) {
 
 ///////////////////////////////////////////////////////////////
 
-bool semiColonConnector::evaluate() {
-    // bool temp = lhs->evaluate();
-    // temp = rhs->evaluate();
-    // return temp;
-    return true;
+int semiColonConnector::evaluate() {
+    int temp = lhs->evaluate();
+
+    if (temp == -1) {
+        return temp;
+    }
+    return rhs->evaluate();
 }
 
 
-bool orConnector::evaluate() {
+int orConnector::evaluate() {
+    int temp = lhs->evaluate();
 
-    // bool val = lhs->evaluate();
-
-    // if (!val) {
-    //     return rhs->evaluate();
-    // }
-    // return val;
-    return true;
+    if (temp == -1) {
+        return temp;
+    }
+    else if (temp == 0) {
+        return rhs->evaluate();
+    }
+    else {
+        return temp;
+    }
 }
 
 
-bool ANDConnector::evaluate() {
-    // bool val = lhs->evaluate();
+int ANDConnector::evaluate() {
+    int temp = lhs->evaluate();
 
-    // if (val) {
-    //     return rhs->evaluate();
-    // }
-    // return false;
-    return true;
+    if (temp == -1) {
+        return temp;
+    }
+    else if (temp == 1) {
+        return rhs->evaluate();
+    }
+    else {
+        return temp;
+    }
+
 }
 
-bool command::evaluate() {
+int command::evaluate() {
 
     vector<string> v = parseCommand(commandString);
+
+    if (commandString == "exit") {
+        return -1;
+    }
 
     pid_t pid = fork();
     pid_t w;
@@ -120,10 +134,10 @@ bool command::evaluate() {
             exit(EXIT_FAILURE);
         }
         if (WEXITSTATUS(status) == 0) {
-            return true;
+            return 1;
         }
     }
-        return false;
+        return 0;
 }
 
 vector<string> command::parseCommand(string s) {
@@ -135,10 +149,6 @@ vector<string> command::parseCommand(string s) {
     while (it != rit) {
         v.push_back(*it);
         ++it;
-    }
-
-    for (unsigned i = 0; i < v.size(); ++i) {
-        cout << v.at(i) << endl;
     }
 
     return v;

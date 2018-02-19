@@ -10,7 +10,7 @@ class Base {
         Base() {}
 
         /* Pure Virtual Functions */
-        virtual bool evaluate() = 0;
+        virtual int evaluate() = 0;
 
         // check if it is an operator
         virtual bool isConnector() = 0;
@@ -35,7 +35,7 @@ class command : public Base {
     command() : commandString() { }
     command(string cmd) : commandString(cmd) { }
 
-    bool evaluate();
+    int evaluate();
 
     bool isConnector() { return false;}
 
@@ -57,7 +57,7 @@ class semiColonConnector : public Base {
         Base* rhs;
 
     public:
-        bool evaluate();
+        int evaluate();
 
         bool isConnector() { return true;}
 
@@ -74,7 +74,7 @@ class orConnector : public Base {
         Base* rhs;
 
     public:
-        bool evaluate();
+        int evaluate();
 
         bool isConnector() { return true;}
 
@@ -91,7 +91,7 @@ class ANDConnector : public Base {
         Base* rhs;
 
     public:
-        bool evaluate();
+        int evaluate();
 
         bool isConnector() { return true;}
 

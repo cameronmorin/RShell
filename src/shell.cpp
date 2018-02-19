@@ -13,14 +13,19 @@ void shell::run() {
 
     Base* root = 0;
 
-    cout << "$ ";
-    getline(cin, UserInput);
+    while (true) {
+        cout << "$ ";
+        getline(cin, UserInput);
 
-    convertInput(UserInput, commands, inputVector);
+        convertInput(UserInput, commands, inputVector);
 
-    root = buildTree(inputVector);
+        root = buildTree(inputVector);
 
-    root->evaluate();
+        if (root->evaluate() == -1) {
+            cout << "exiting shell" << endl;
+            return;
+        }
+    }
 
     return;
 }
@@ -69,15 +74,6 @@ void shell::convertInput(string UserInput, vector<string>& commands,
             inputVector.push_back(cmd);
         }
     }
-    // testing if it pushed onto it
-    // for (unsigned i = 0; i < inputVector.size(); ++i) {
-    //     if (inputVector.at(i)->isConnector()) {
-    //         cout << "its a connector" << endl;
-    //     }
-    //     else {
-    //         cout << "its a command" << endl;
-    //     }
-    // }
 }
 
 
