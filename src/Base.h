@@ -1,6 +1,7 @@
 #ifndef __BASE_H__
 #define __BASE_H__
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Base {
@@ -43,6 +44,11 @@ class command : public Base {
 	void setLeftChild(Base* left);
 
 	void setRightChild(Base* right);
+
+    // helper functions
+    private:
+        vector<string> parseCommand(string s);
+
 };
 
 class semiColonConnector : public Base {

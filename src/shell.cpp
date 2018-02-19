@@ -8,14 +8,14 @@ using namespace std;
 
 void shell::run() {
 
-    //Base* root = 0;
+    Base* root = 0;
 
     cout << "$ ";
     getline(cin, UserInput);
 
     convertInput(UserInput, commands, inputVector);
 
-    //root = buildTree(inputVector);
+    root = buildTree(inputVector);
 
     //root->evaluate();
 
@@ -67,14 +67,14 @@ void shell::convertInput(string UserInput, vector<string>& commands,
         }
     }
     // testing if it pushed onto it
-    for (unsigned i = 0; i < inputVector.size(); ++i) {
-        if (inputVector.at(i)->isConnector()) {
-            cout << "its a connector" << endl;
-        }
-        else {
-            cout << "its a command" << endl;
-        }
-    }
+    // for (unsigned i = 0; i < inputVector.size(); ++i) {
+    //     if (inputVector.at(i)->isConnector()) {
+    //         cout << "its a connector" << endl;
+    //     }
+    //     else {
+    //         cout << "its a command" << endl;
+    //     }
+    // }
 }
 
 
