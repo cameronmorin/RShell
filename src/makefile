@@ -1,15 +1,23 @@
 CC = g++
-C11 = -std=c++11
-CC_FLAGS = -Wall -Werror -pedantic
-OBJECTS = test.cpp shell.cpp Base.cpp
+CC_FLAGS = -std=c++11 -Wall -Werror -pedantic
+
+EXECUTABLE = rshell
+SOURCEDIR = src
+BUILDER = bin
+
+OBJECTS = test.cpp Base.cpp shell.cpp
+
 
 all: $(OBJECTS)
-	$(CC) $(C11) $(CC_FLAGS) $(OBJECTS) -o shell
+	mkdir -p $(BUILDER)
+	$(CC) $(CC_FLAGS) $(OBJECTS) -o $(BUILDER)/$(EXECUTABLE)
 
 
 rshell: $(OBJECTS)
-	$(CC) $(C11) $(CC_FLAGS) $(OBJECTS) -o shell
+	mkdir -p $(BUILDER)
+	$(CC) $(CC_FLAGS) $(OBJECTS) -o $(BUILDER)/$(EXECUTABLE)
 
 clean: $(OBJECTS)
-	rm -f test.o shell.o Base.o
+	rm -f $(EXECUTABLE) $(OBJECTS)
+	rm -rf $(BUILDER)
 
