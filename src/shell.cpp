@@ -18,7 +18,7 @@ void shell::run() {
 
     root = buildTree(inputVector);
 
-    //root->evaluate();
+    root->evaluate();
 
     return;
 }
@@ -94,7 +94,7 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		//If connector, evaluate. Else, push_back reversePolish
 		if (inputVector.at(i)->isConnector()) {
 			//Priority nonsense
-			while(inputVector.at(i)->getPriority() < connectorStack.top()->getPriority()) {
+			while(!connectorStack.empty() && inputVector.at(i)->getPriority() < connectorStack.top()->getPriority()) {
 				reversePolish.push_back(connectorStack.top());
 				connectorStack.pop();
 			}

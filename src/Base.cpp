@@ -98,7 +98,7 @@ bool command::evaluate() {
     char* args[500];
     args[v.size()] = 0;
     
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned i = 0; i < v.size(); ++i) {
         args[i] = (char*)v.at(i).c_str();
     }
 
@@ -137,7 +137,7 @@ vector<string> command::parseCommand(string s) {
         ++it;
     }
 
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned i = 0; i < v.size(); ++i) {
         cout << v.at(i) << endl;
     }
 
