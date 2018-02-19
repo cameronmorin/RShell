@@ -122,7 +122,7 @@ int command::evaluate() {
     }
     else if (pid == 0) {
         if (execvp(args[0], args) < 0) {
-            cout << "execution failed" << endl;
+            cout << "-bash: " << args[0] << ": command not found" << endl;
             exit(1);
         }
     }

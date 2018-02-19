@@ -22,9 +22,10 @@ void shell::run() {
         root = buildTree(inputVector);
 
         if (root->evaluate() == -1) {
-            cout << "exiting shell" << endl;
             return;
         }
+        inputVector.clear();
+        commands.clear();
     }
 
     return;
