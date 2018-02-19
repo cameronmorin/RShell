@@ -1,6 +1,7 @@
 #include "shell.h"
 #include <stack>
 #include <iostream>
+#include <string>
 #include <regex>
 #include <stack>
 
