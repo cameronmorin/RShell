@@ -11,21 +11,32 @@ using namespace std;
 
 void shell::run() {
 
-    Base* root = 0;
+    semiColonConnector* semi = new semiColonConnector();
+    command* cmd1 = new command("ls");
+    command* cmd2 = new command("echo hi");
 
-    while (true) {
-        cout << "$ ";
-        getline(cin, UserInput);
+    semi->setLeftChild(cmd1);
+    semi->setRightChild(cmd2);
 
-        convertInput(UserInput, commands, inputVector);
+    semi->evaluate();
 
-        root = buildTree(inputVector);
 
-        if (root->evaluate() == -1) {
-            cout << "exiting shell" << endl;
-            return;
-        }
-    }
+
+
+
+    // while (true) {
+    //     cout << "$ ";
+    //     getline(cin, UserInput);
+
+    //     convertInput(UserInput, commands, inputVector);
+
+    //     root = buildTree(inputVector);
+
+    //     if (root->evaluate() == -1) {
+    //         cout << "exiting shell" << endl;
+    //         return;
+    //     }
+    // }
 
     return;
 }
