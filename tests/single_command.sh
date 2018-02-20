@@ -3,7 +3,6 @@
 echo hello world
 echo we are testing rshell
 echo let the testing begin
-git status
 echo
 touch testfile01
 ls

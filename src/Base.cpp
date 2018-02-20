@@ -1,6 +1,5 @@
 #include "Base.h"
 #include <regex>
-#include <limits>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -98,15 +97,16 @@ int ANDConnector::evaluate() {
 
 int command::evaluate() {
 
-    //cout << "at the evaluate stage" << endl;
-
+    // used for long listed commands spaced out
     vector<string> v = parseCommand(commandString);
 
+    // cases for exiting the shell
     if (commandString == "exit") {
         return -1;
     }
-
-    //cout << "not exit sounds good" << endl;
+    if (commandString.find("exit") != string::npos) {
+        return -1;
+    }
 
     pid_t pid = fork();
     pid_t w;
@@ -119,7 +119,7 @@ int command::evaluate() {
     for (unsigned i = 0; i < v.size(); ++i) {
         args[i] = (char*)v.at(i).c_str();
     }
-
+    // forking test cases
     if (pid < 0) {
         perror("forking child failed");
         exit(1);
@@ -127,7 +127,6 @@ int command::evaluate() {
     else if (pid == 0) {
         if (execvp(args[0], args) < 0) {
             perror("execution failure");
-            // cout << "-bash: " << args[0] << ": command not found" << endl;
             exit(1);
         }
     }
@@ -155,12 +154,6 @@ vector<string> command::parseCommand(string s) {
         v.push_back(*it);
         ++it;
     }
-
-    // cout << "contents of parsed command" << endl;
-    // for (unsigned i = 0; i < v.size(); ++i) {
-    //     cout << v.at(i) << endl;
-    // }
-
 
     return v;
 }

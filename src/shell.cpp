@@ -13,19 +13,25 @@ void shell::run() {
 
     Base* root = 0;
 
+    // loopin for shell command prompt
     while (true) {
         cout << "$ ";
         getline(cin, UserInput);
+
+        if (UserInput == "") {
+            continue;
+        }
 
         convertInput(UserInput, commands, inputVector);
 
         root = buildTree(inputVector);
 
-        //cout << "return root surcessfully" << endl;
+        // if -1 command was exit
         if (root->evaluate() == -1) {
             return;
         }
-        //cout << "evaluated surcessfully" << endl;
+
+        // clears vectors to restart loop with clean slate
         inputVector.clear();
         commands.clear();
     }
@@ -36,8 +42,9 @@ void shell::run() {
 void shell::convertInput(string UserInput, vector<string>& commands, vector<Base*>& inputVector) {
 
     vector<string> v;
+
     // regular expression to parse through the user input
-    regex reg1("(;|\\|{2}|&{2}|#)|([^\\s][^;|\\|{2}|&{2}|]*)"); 
+    regex reg1("(;|\\|{2}|&{2}|#)|([^\\s][^;|\\|{2}|&{2}|#]*)"); 
     regex_token_iterator<string::iterator> it{UserInput.begin(), UserInput.end(), reg1};
     regex_token_iterator<string::iterator> rit;
 
@@ -46,10 +53,6 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
         v.push_back(*it);
         ++it;
     }
-
-    // for (unsigned i = 0; i < v.size(); ++i) {
-    //     cout << v.at(i) << endl;
-    // }
 
     // reads through vector to eliminate comments from executions
     for (unsigned i = 0; i < v.size(); ++i) {
@@ -60,8 +63,6 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             commands.push_back(v.at(i));
         }
     }
-
-    //cout << "still a go ...." << UserInput << endl;
 
     // go through and convert all inputs into base pointers
     for (unsigned i = 0; i < commands.size(); ++i) {
@@ -82,8 +83,6 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             inputVector.push_back(cmd);
         }
     }
-
-    //cout << "convertInput is complete ...." << UserInput << endl;
 }
 
 
@@ -94,16 +93,12 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 
 	//Check for empty vector
 	if (inputVector.empty()) {
-        //cout << "here it is" << endl;
 		return toReturn;
 	}
 
-    //cout << "testing build tree ....." << endl;
-
 	for (unsigned i = 0; i < inputVector.size(); ++i) {
-		//If connector, evaluate. Else, push_back reversePolish
 		if (inputVector.at(i)->isConnector()) {
-			//Priority nonsense
+			// checking priority
 			while(!connectorStack.empty() && inputVector.at(i)->getPriority() < connectorStack.top()->getPriority()) {
 				reversePolish.push_back(connectorStack.top());
 				connectorStack.pop();
@@ -120,11 +115,9 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		reversePolish.push_back(connectorStack.top());
 		connectorStack.pop();
 	}
-    
-    //cout << "converted notation correctly" << endl;
 
-	//ReversePolishNotation Vector built above
-	//Now build the tree
+	// ReversePolishNotation Vector built above
+	// Now build the tree
 	stack<Base*> Tree;
 	
 	for (unsigned j = 0; j < reversePolish.size(); ++j) {
@@ -136,12 +129,10 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		}
 		Tree.push(reversePolish.at(j));
 	}
-
-    //cout << "built the tree correctly" << endl;
 	return Tree.top();	
 }
 
-/*
+/* for future implementation
 int shell::priority(Base* connector) {
 	//FIXME
 	return 0;

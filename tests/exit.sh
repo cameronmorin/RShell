@@ -19,8 +19,26 @@ exit
 EOF2
 
 ../bin/rshell << "EOF3"
-cat penut
+cal
 echo wait
 echo exiting4
 exit
 EOF3
+
+../bin/rshell << "EOF4"
+echo try; exit
+EOF4
+
+../bin/rshell << "EOF5"
+echo penut && exit
+EOF5
+
+../bin/rshell << "EOF6"
+exit \#just exit
+EOF6
+
+../bin/rshell << 'EOF'
+echo A || exit \#A
+exit
+EOF
+
