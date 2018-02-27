@@ -102,4 +102,30 @@ class ANDConnector : public Base {
 		void setLeftChild(Base* left);
 };
 
+class leftPrecedence : public Base {
+	public:
+		int evaluate() { return 0;}
+
+		bool isConnector() { return true;}
+
+		int getPriority() { return 4;}
+
+		void setRightChild(Base* right) { return;}
+
+		void setLeftChild(Base* left) { return;}
+};
+
+class rightPrecedence : public Base {
+	public:
+		int evaluate() { return 0;}
+
+		bool isConnector() { return true;}
+
+		int getPriority() { return 4;}
+
+		void setRightChild(Base* right) { return;}
+
+		void setLeftChild(Base* left) { return;}
+};
+
 #endif // __BASE_H__
