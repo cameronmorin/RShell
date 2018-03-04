@@ -78,6 +78,12 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             semiColonConnector* semi = new semiColonConnector();
             inputVector.push_back(semi);
         }
+		else if (commands.at(i) == "(") {
+			leftPrecedence* left = new leftPrecedence();
+		}
+		else if (commands.at(i) == ")") {
+			rightPrecedence* right = new rightPrecedence();
+		}
         else {
             command* cmd = new command(commands.at(i));
             inputVector.push_back(cmd);
