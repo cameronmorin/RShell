@@ -110,9 +110,9 @@ class leftPrecedence : public Base {
 
 		int getPriority() { return 4;}
 
-		void setRightChild(Base* right) { return;}
+		void setRightChild(Base* right);
 
-		void setLeftChild(Base* left) { return;}
+		void setLeftChild(Base* left);
 };
 
 class rightPrecedence : public Base {
@@ -123,9 +123,9 @@ class rightPrecedence : public Base {
 
 		int getPriority() { return 4;}
 
-		void setRightChild(Base* right) { return;}
+		void setRightChild(Base* right);
 
-		void setLeftChild(Base* left) { return;}
+		void setLeftChild(Base* left);
 };
 
 #endif // __BASE_H__
