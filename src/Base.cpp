@@ -52,22 +52,22 @@ void ANDConnector::setRightChild(Base* right) {
 }
 
 void leftPrecedence::setLeftChild(Base* left) {
-	cout << "ERROR: Tried setting a child to a precedence operator"
+	cout << "ERROR: Tried setting a child to a precedence operator";
 	return;
 }
 
 void leftPrecedence::setRightChild(Base* right) {
-	cout << "ERROR: Tried setting a child to a precedence operator"
+	cout << "ERROR: Tried setting a child to a precedence operator";
 	return;
 }
 
 void rightPrecedence::setLeftChild(Base* left) {
-	cout << "ERROR: Tried setting a child to a precedence operator"
+	cout << "ERROR: Tried setting a child to a precedence operator";
 	return;
 }
 
 void rightPrecedence::setRightChild(Base* right) {
-	cout << "ERROR: Tried setting a child to a precedence operator"
+	cout << "ERROR: Tried setting a child to a precedence operator";
 	return;
 }
 
