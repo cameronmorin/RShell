@@ -44,7 +44,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
     vector<string> v;
 
     // regular expression to parse through the user input
-    regex reg1("(;|\\|{2}|&{2}|#)|([^\\s][^;|\\|{2}|&{2}|#]*)"); 
+    regex reg1("(;|\\|{2}|&{2}|#|\\)|\\()|([^\\s][^;|\\|{2}|&{2}|#|\\)|\\(]*)"); 
     regex_token_iterator<string::iterator> it{UserInput.begin(), UserInput.end(), reg1};
     regex_token_iterator<string::iterator> rit;
 
