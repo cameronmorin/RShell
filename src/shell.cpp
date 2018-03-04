@@ -80,9 +80,11 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
         }
 		else if (commands.at(i) == "(") {
 			leftPrecedence* left = new leftPrecedence();
+			inputVector.push_back(left);
 		}
 		else if (commands.at(i) == ")") {
 			rightPrecedence* right = new rightPrecedence();
+			inputVector.push_back(right);
 		}
         else {
             command* cmd = new command(commands.at(i));
