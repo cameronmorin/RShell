@@ -61,7 +61,15 @@ void leftPrecedence::setRightChild(Base* right) {
 	return;
 }
 
+void rightPrecedence::setLeftChild(Base* left) {
+	cout << "ERROR: Tried setting a child to a precedence operator"
+	return;
+}
 
+void rightPrecedence::setRightChild(Base* right) {
+	cout << "ERROR: Tried setting a child to a precedence operator"
+	return;
+}
 
 ///////////////////////////////////////////////////////////////
 
