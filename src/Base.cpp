@@ -51,6 +51,16 @@ void ANDConnector::setRightChild(Base* right) {
 	return;
 }
 
+void leftPrecedence::setLeftChild(Base* left) {
+	cout << "ERROR: Tried setting a child to a precedence operator"
+	return;
+}
+
+void leftPrecedence::setRightChild(Base* right) {
+	cout << "ERROR: Tried setting a child to a precedence operator"
+	return;
+}
+
 
 
 ///////////////////////////////////////////////////////////////
@@ -107,6 +117,9 @@ int command::evaluate() {
     if (commandString.find("exit") != string::npos) {
         return -1;
     }
+	
+	//FIXME
+	//Implement test function call here!!!!!!
 
     pid_t pid = fork();
     pid_t w;
