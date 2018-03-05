@@ -186,5 +186,8 @@ vector<string> command::parseCommand(string s) {
 
 void Base::test(const string& cmd) {
 	cout << "Made the test function call properly." << endl;
+	if (cmd.size() > 5 && cmd.at(5) == '-') {
+		cout << "Has flag" << endl;
+	}
 	return;
 }
