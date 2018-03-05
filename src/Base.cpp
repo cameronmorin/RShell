@@ -130,6 +130,7 @@ int command::evaluate() {
 	//Implement test function call here!!!!!!
 	if (commandString.substr(0,4) == "test") {
 		cout << "TEST FOUND" << endl;
+		return 1;
 	}
 
 
