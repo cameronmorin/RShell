@@ -32,7 +32,7 @@ class Base {
 		virtual bool isRightP() = 0;
 
 		//Universal test function
-		void test(const string &cmd);
+		bool test(const string &cmd);
 };
 
 class command : public Base {
