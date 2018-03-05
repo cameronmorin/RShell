@@ -30,6 +30,9 @@ class Base {
 
 		//Checks if the connector is a ')'
 		virtual bool isRightP() = 0;
+
+		//Universal test function
+		void test(const string &cmd);
 };
 
 class command : public Base {

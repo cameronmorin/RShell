@@ -129,7 +129,7 @@ int command::evaluate() {
 	//FIXME
 	//Implement test function call here!!!!!!
 	if (commandString.substr(0,4) == "test") {
-		cout << "TEST FOUND" << endl;
+		test(commandString);
 		return 1;
 	}
 
@@ -184,3 +184,7 @@ vector<string> command::parseCommand(string s) {
     return v;
 }
 
+void Base::test(const string& cmd) {
+	cout << "Made the test function call properly." << endl;
+	return;
+}
