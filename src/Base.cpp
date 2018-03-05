@@ -128,6 +128,10 @@ int command::evaluate() {
 	
 	//FIXME
 	//Implement test function call here!!!!!!
+	if (commandString.substr(0,4) == "test") {
+		cout << "TEST FOUND" << endl;
+	}
+
 
     pid_t pid = fork();
     pid_t w;
