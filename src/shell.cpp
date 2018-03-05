@@ -107,9 +107,15 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 	for (unsigned i = 0; i < inputVector.size(); ++i) {
 		if (inputVector.at(i)->isConnector()) {
 			// checking priority
-			while(!connectorStack.empty() && inputVector.at(i)->getPriority() < connectorStack.top()->getPriority()) {
-				reversePolish.push_back(connectorStack.top());
-				connectorStack.pop();
+			while(!connectorStack.empty() && inputVector.at(i)->getPriority() <= connectorStack.top()->getPriority()) {
+				if (inputVector.at(i)->getPriority() == connectorStack.top()->getPriority() && inputVector.at(i)->getPriority() == 2) {
+					//Semicolon connectors
+					break;
+				}
+				else {
+					reversePolish.push_back(connectorStack.top());
+					connectorStack.pop();
+				}
 			}
 			connectorStack.push(inputVector.at(i));
 		}
