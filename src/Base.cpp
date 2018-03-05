@@ -127,13 +127,21 @@ int command::evaluate() {
         return -1;
     }
 
-	cout << commandString << endl;
 		
-	//FIXME
 	//Implement test function call here!!!!!!
 	if (commandString.substr(0,4) == "test") {
-		test(commandString);
-		return 1;
+		if (commandString.at(commandString.size() - 1) == ' ') {
+			commandString.pop_back();
+		}
+		//
+		if (test(commandString)) {
+			//Evaluates to true
+			return 1;
+		}
+		else {
+			//Evaluates to false
+			return 0;
+		}
 	}
 
 
@@ -187,26 +195,60 @@ vector<string> command::parseCommand(string s) {
     return v;
 }
 
-void Base::test(const string& cmd) {
-	cout << "Made the test function call properly." << endl;
+bool Base::test(const string& cmd) {
 	struct stat buf;	
 	const char* myPath= 0;
+
 	
 	if (cmd.size() > 5 && cmd.at(5) == '-') {
-		cout << "Has flag" << endl;
+		//Has flag
 		myPath = cmd.substr(8,cmd.size()-1).c_str();
 		if (stat(myPath, &buf) == 0) {
 			//true
-			cout << "WORKS" << endl;
+			if (cmd.at(6) == 'e') {
+				cout << "(TRUE)" << endl;
+				return true;
+			}
+			else if (cmd.at(6) == 'f') {
+				//Check for file
+				if (S_ISREG(buf.st_mode)) {
+					cout << "(TRUE)" << endl;
+					return true;
+				}
+				else {
+					cout << "(FALSE)" << endl;
+					return false;
+				}
+			}
+			else {
+				//Check for directory
+				if (S_ISDIR(buf.st_mode)) {
+					cout << "(TRUE)" << endl;
+					return true;
+				}
+				else {
+					cout << "(FALSE)" << endl;
+					return false;
+				}
+			}
 		}
 		else {
 			//false
-			cout << "WORKS FALSE" << endl;
+			cout << "(FALSE)" << endl;
+			return false;
 		}
 	}
 	else {
 		//Doesn't have a flag, assume -e flag
 		myPath = cmd.substr(5,cmd.size()-1).c_str();
+		if (stat(myPath, &buf) == 0) {
+			cout << "(TRUE)" << endl;
+			return true;
+		}
+		else {
+			cout << "(FALSE)" << endl;
+			return false;
+		}
 	}
-	return;
+	return true;
 }
