@@ -5,7 +5,7 @@
 #include <regex>
 #include <stack>
 #include <iterator>
-#include <boost/regex.hpp>
+#include <regex>
 
 using namespace std;
 
