@@ -34,7 +34,7 @@ echo penut && exit
 EOF5
 
 ../bin/rshell << "EOF6"
-exit #just exit
+exit \#just exit
 EOF6
 
 ../bin/rshell << 'EOF'
