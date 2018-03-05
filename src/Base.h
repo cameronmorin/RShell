@@ -24,6 +24,12 @@ class Base {
 
 		//Set the left child for certain classes
 		virtual void setLeftChild(Base* left) = 0;
+
+		//Checks if the connector is a '('
+		virtual bool isLeftP() = 0;
+
+		//Checks if the connector is a ')'
+		virtual bool isRightP() = 0;
 };
 
 class command : public Base {
@@ -38,6 +44,10 @@ class command : public Base {
     int evaluate();
 
     bool isConnector() { return false;}
+
+	bool isLeftP() { return false;}
+
+	bool isRightP() { return false;}
 
 	int getPriority() { return 0;}
 
@@ -61,6 +71,10 @@ class semiColonConnector : public Base {
 
         bool isConnector() { return true;}
 
+		bool isLeftP() { return false;}
+
+		bool isRightP() { return false;}
+		
 		int getPriority() { return 2;}
 
 		void setLeftChild(Base* left);
@@ -78,6 +92,10 @@ class orConnector : public Base {
 
         bool isConnector() { return true;}
 
+		bool isLeftP() { return false;}
+
+		bool isRightP() { return false;}
+
 		int getPriority() { return 3;}
 	
 		void setRightChild(Base* right);
@@ -93,7 +111,11 @@ class ANDConnector : public Base {
     public:
         int evaluate();
 
-        bool isConnector() { return true;}
+        bool isConnector() { return true;}	
+		
+		bool isLeftP() { return false;}
+
+		bool isRightP() { return false;}
 
 		int getPriority() { return 3;}
 
@@ -108,6 +130,10 @@ class leftPrecedence : public Base {
 
 		bool isConnector() { return true;}
 
+		bool isLeftP() { return true;}
+
+		bool isRightP() { return false;}
+
 		int getPriority() { return 4;}
 
 		void setRightChild(Base* right);
@@ -120,6 +146,10 @@ class rightPrecedence : public Base {
 		int evaluate() { return 0;}
 
 		bool isConnector() { return true;}
+
+		bool isLeftP() { return false;}
+
+		bool isRightP() { return true;}
 
 		int getPriority() { return 4;}
 
