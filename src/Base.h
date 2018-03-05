@@ -134,7 +134,7 @@ class leftPrecedence : public Base {
 
 		bool isRightP() { return false;}
 
-		int getPriority() { return 4;}
+		int getPriority() { return 1;}
 
 		void setRightChild(Base* right);
 
@@ -151,7 +151,7 @@ class rightPrecedence : public Base {
 
 		bool isRightP() { return true;}
 
-		int getPriority() { return 4;}
+		int getPriority() { return 1;}
 
 		void setRightChild(Base* right);
 
