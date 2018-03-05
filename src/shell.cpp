@@ -60,6 +60,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
         ++it;
     }
 
+
     // reads through vector to eliminate comments from executions
     for (unsigned i = 0; i < v.size(); ++i) {
         if (v.at(i) == "#") {
@@ -69,6 +70,14 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             commands.push_back(v.at(i));
         }
     }
+
+	//Convert all test calls to the "test" style
+	for (unsigned i = 0; i < commands.size(); ++i) {
+		if (commands.at(i).at(0) == '[') {
+			commands.at(i).replace(0,1, "test");
+			commands.at(i).resize(commands.at(i).size() - 2);
+		}
+	}
 
     // go through and convert all inputs into base pointers
     for (unsigned i = 0; i < commands.size(); ++i) {

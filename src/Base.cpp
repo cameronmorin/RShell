@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -125,7 +126,9 @@ int command::evaluate() {
     if (commandString.find("exit") != string::npos) {
         return -1;
     }
-	
+
+	cout << commandString << endl;
+		
 	//FIXME
 	//Implement test function call here!!!!!!
 	if (commandString.substr(0,4) == "test") {
@@ -186,8 +189,24 @@ vector<string> command::parseCommand(string s) {
 
 void Base::test(const string& cmd) {
 	cout << "Made the test function call properly." << endl;
+	struct stat buf;	
+	const char* myPath= 0;
+	
 	if (cmd.size() > 5 && cmd.at(5) == '-') {
 		cout << "Has flag" << endl;
+		myPath = cmd.substr(8,cmd.size()-1).c_str();
+		if (stat(myPath, &buf) == 0) {
+			//true
+			cout << "WORKS" << endl;
+		}
+		else {
+			//false
+			cout << "WORKS FALSE" << endl;
+		}
+	}
+	else {
+		//Doesn't have a flag, assume -e flag
+		myPath = cmd.substr(5,cmd.size()-1).c_str();
 	}
 	return;
 }
