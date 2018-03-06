@@ -198,7 +198,11 @@ vector<string> command::parseCommand(string s) {
 bool Base::test(const string& cmd) {
 	struct stat buf;	
 	const char* myPath= 0;
-
+	
+	if (cmd == "test") {
+		cout << "(TRUE)" << endl;
+		return true;
+	}
 	
 	if (cmd.size() > 5 && cmd.at(5) == '-') {
 		//Has flag

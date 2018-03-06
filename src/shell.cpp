@@ -72,8 +72,17 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 	//Convert all test calls to the "test" style
 	for (unsigned i = 0; i < commands.size(); ++i) {
 		if (commands.at(i).at(0) == '[') {
+			if (commands.at(i).at(1) != ' ') {
+				commands.at(i).insert(1, " ");
+			}
 			commands.at(i).replace(0,1, "test");
-			commands.at(i).resize(commands.at(i).size() - 2);
+			
+			if (commands.at(i).at(commands.at(i).size() - 2) != ' ') {
+				commands.at(i).resize(commands.at(i).size() - 1);
+			}
+			else {
+				commands.at(i).resize(commands.at(i).size() - 2);
+			}
 		}
 	}
 
@@ -131,7 +140,13 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 					reversePolish.push_back(connectorStack.top());
 					connectorStack.pop();
 				}
-				connectorStack.pop();
+				
+				if (!connectorStack.empty()) {
+					connectorStack.pop();
+				}
+				else {
+					return 0;
+				}
 				precedenceCount--;
 			}
 			// Connector is not a precedence operator
@@ -155,6 +170,11 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		}
 	}
 	
+	//Check for odd number of precedence operators
+	if (precedenceCount != 0) {
+		return 0;
+	}
+	
 	while(!connectorStack.empty()) {
 		reversePolish.push_back(connectorStack.top());
 		connectorStack.pop();
@@ -174,10 +194,6 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		Tree.push(reversePolish.at(j));
 	}
 	
-	//Check for odd number of precedence operators
-	if (precedenceCount != 0) {
-		return 0;
-	}
 
 	return Tree.top();	
 }
