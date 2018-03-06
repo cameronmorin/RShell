@@ -29,11 +29,9 @@ void shell::run() {
 		//Check for uneven amount of precedence operators
 		if (root == 0) {
 			cout << "Entered uneven amount of precedence operators. Please try again" << endl;
-			return;
 		}
-
         // if -1 command was exit
-        if (root->evaluate() == -1) {
+        else if (root->evaluate() == -1) {
             return;
         }
 
