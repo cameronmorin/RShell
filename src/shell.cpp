@@ -127,7 +127,7 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 			}
 			// checking right precedence
 			else if (inputVector.at(i)->isRightP()) {
-				while(!connectorStack.top()->isLeftP()) {
+				while(!connectorStack.empty() && !connectorStack.top()->isLeftP()) {
 					reversePolish.push_back(connectorStack.top());
 					connectorStack.pop();
 				}
