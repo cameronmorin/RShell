@@ -29,11 +29,10 @@ void shell::run() {
 		//Check for uneven amount of precedence operators
 		if (root == 0) {
 			cout << "Entered uneven amount of precedence operators. Please try again" << endl;
-			return;
 		}
-
+		
         // if -1 command was exit
-        if (root->evaluate() == -1) {
+        else if (root->evaluate() == -1) {
             return;
         }
 
@@ -138,11 +137,17 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 			}
 			// checking right precedence
 			else if (inputVector.at(i)->isRightP()) {
-				while(!connectorStack.top()->isLeftP()) {
+				while(!connectorStack.empty() && !connectorStack.top()->isLeftP()) {
 					reversePolish.push_back(connectorStack.top());
 					connectorStack.pop();
 				}
-				connectorStack.pop();
+				
+				if (!connectorStack.empty()) {
+					connectorStack.pop();
+				}
+				else {
+					return 0;
+				}
 				precedenceCount--;
 			}
 			// Connector is not a precedence operator
@@ -166,6 +171,11 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		}
 	}
 	
+	//Check for odd number of precedence operators
+	if (precedenceCount != 0) {
+		return 0;
+	}
+	
 	while(!connectorStack.empty()) {
 		reversePolish.push_back(connectorStack.top());
 		connectorStack.pop();
@@ -185,10 +195,6 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		Tree.push(reversePolish.at(j));
 	}
 	
-	//Check for odd number of precedence operators
-	if (precedenceCount != 0) {
-		return 0;
-	}
 
 	return Tree.top();	
 }
