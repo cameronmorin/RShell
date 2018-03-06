@@ -25,6 +25,12 @@ void shell::run() {
         convertInput(UserInput, commands, inputVector);
 
         root = buildTree(inputVector);
+		
+		//Check for uneven amount of precedence operators
+		if (root == 0) {
+			cout << "Entered uneven amount of precedence operators. Please try again" << endl;
+			return;
+		}
 
         // if -1 command was exit
         if (root->evaluate() == -1) {
@@ -44,7 +50,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
     vector<string> v;
 
     // regular expression to parse through the user input
-    regex reg1("(;|\\|{2}|&{2}|#)|([^\\s][^;|\\|{2}|&{2}|#]*)"); 
+    regex reg1("(;|\\|{2}|&{2}|#|\\)|\\()|([^\\s][^;|\\|{2}|&{2}|#|\\)|\\(]*)"); 
     regex_token_iterator<string::iterator> it{UserInput.begin(), UserInput.end(), reg1};
     regex_token_iterator<string::iterator> rit;
 
@@ -53,6 +59,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
         v.push_back(*it);
         ++it;
     }
+
 
     // reads through vector to eliminate comments from executions
     for (unsigned i = 0; i < v.size(); ++i) {
@@ -63,6 +70,14 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             commands.push_back(v.at(i));
         }
     }
+
+	//Convert all test calls to the "test" style
+	for (unsigned i = 0; i < commands.size(); ++i) {
+		if (commands.at(i).at(0) == '[') {
+			commands.at(i).replace(0,1, "test");
+			commands.at(i).resize(commands.at(i).size() - 2);
+		}
+	}
 
     // go through and convert all inputs into base pointers
     for (unsigned i = 0; i < commands.size(); ++i) {
@@ -78,6 +93,14 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
             semiColonConnector* semi = new semiColonConnector();
             inputVector.push_back(semi);
         }
+		else if (commands.at(i) == "(") {
+			leftPrecedence* left = new leftPrecedence();
+			inputVector.push_back(left);
+		}
+		else if (commands.at(i) == ")") {
+			rightPrecedence* right = new rightPrecedence();
+			inputVector.push_back(right);
+		}
         else {
             command* cmd = new command(commands.at(i));
             inputVector.push_back(cmd);
@@ -88,6 +111,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 
 Base* shell::buildTree(vector<Base*> inputVector) {
 	Base* toReturn = 0;
+	int precedenceCount = 0;
 	vector<Base*> reversePolish;
 	stack<Base*> connectorStack;	
 
@@ -98,12 +122,34 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 
 	for (unsigned i = 0; i < inputVector.size(); ++i) {
 		if (inputVector.at(i)->isConnector()) {
-			// checking priority
-			while(!connectorStack.empty() && inputVector.at(i)->getPriority() < connectorStack.top()->getPriority()) {
-				reversePolish.push_back(connectorStack.top());
-				connectorStack.pop();
+			// checking left precedence
+			if (inputVector.at(i)->isLeftP()) {
+				connectorStack.push(inputVector.at(i));
+				precedenceCount++;
 			}
-			connectorStack.push(inputVector.at(i));
+			// checking right precedence
+			else if (inputVector.at(i)->isRightP()) {
+				while(!connectorStack.top()->isLeftP()) {
+					reversePolish.push_back(connectorStack.top());
+					connectorStack.pop();
+				}
+				connectorStack.pop();
+				precedenceCount--;
+			}
+			// Connector is not a precedence operator
+			else {
+				while(!connectorStack.empty() && inputVector.at(i)->getPriority() <= connectorStack.top()->getPriority()) {
+					if (inputVector.at(i)->getPriority() == connectorStack.top()->getPriority() && inputVector.at(i)->getPriority() == 2) {
+						//Semicolon connectors
+						break;
+					}
+					else {
+						reversePolish.push_back(connectorStack.top());
+						connectorStack.pop();
+					}
+				}
+				connectorStack.push(inputVector.at(i));
+			}
 		}
 		else {
 			//Is command
@@ -129,6 +175,12 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		}
 		Tree.push(reversePolish.at(j));
 	}
+	
+	//Check for odd number of precedence operators
+	if (precedenceCount != 0) {
+		return 0;
+	}
+
 	return Tree.top();	
 }
 

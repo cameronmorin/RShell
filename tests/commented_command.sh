@@ -5,7 +5,7 @@ echo A \#echo bin
 echo A \#echo DD
 echo tru && echo blue \#echo no
 echo A \#### echo hi
-ls \# echo hi
-echo \#kkkkk
+ls # echo hi
+echo #kkkkk
 exit
 EOF

@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -51,7 +52,25 @@ void ANDConnector::setRightChild(Base* right) {
 	return;
 }
 
+void leftPrecedence::setLeftChild(Base* left) {
+	cout << "ERROR: Tried setting a child to a precedence operator";
+	return;
+}
 
+void leftPrecedence::setRightChild(Base* right) {
+	cout << "ERROR: Tried setting a child to a precedence operator";
+	return;
+}
+
+void rightPrecedence::setLeftChild(Base* left) {
+	cout << "ERROR: Tried setting a child to a precedence operator";
+	return;
+}
+
+void rightPrecedence::setRightChild(Base* right) {
+	cout << "ERROR: Tried setting a child to a precedence operator";
+	return;
+}
 
 ///////////////////////////////////////////////////////////////
 
@@ -108,6 +127,24 @@ int command::evaluate() {
         return -1;
     }
 
+		
+	//Implement test function call here!!!!!!
+	if (commandString.substr(0,4) == "test") {
+		if (commandString.at(commandString.size() - 1) == ' ') {
+			commandString.pop_back();
+		}
+		//
+		if (test(commandString)) {
+			//Evaluates to true
+			return 1;
+		}
+		else {
+			//Evaluates to false
+			return 0;
+		}
+	}
+
+
     pid_t pid = fork();
     pid_t w;
 
@@ -158,3 +195,60 @@ vector<string> command::parseCommand(string s) {
     return v;
 }
 
+bool Base::test(const string& cmd) {
+	struct stat buf;	
+	const char* myPath= 0;
+
+	
+	if (cmd.size() > 5 && cmd.at(5) == '-') {
+		//Has flag
+		myPath = cmd.substr(8,cmd.size()-1).c_str();
+		if (stat(myPath, &buf) == 0) {
+			//true
+			if (cmd.at(6) == 'e') {
+				cout << "(TRUE)" << endl;
+				return true;
+			}
+			else if (cmd.at(6) == 'f') {
+				//Check for file
+				if (S_ISREG(buf.st_mode)) {
+					cout << "(TRUE)" << endl;
+					return true;
+				}
+				else {
+					cout << "(FALSE)" << endl;
+					return false;
+				}
+			}
+			else {
+				//Check for directory
+				if (S_ISDIR(buf.st_mode)) {
+					cout << "(TRUE)" << endl;
+					return true;
+				}
+				else {
+					cout << "(FALSE)" << endl;
+					return false;
+				}
+			}
+		}
+		else {
+			//false
+			cout << "(FALSE)" << endl;
+			return false;
+		}
+	}
+	else {
+		//Doesn't have a flag, assume -e flag
+		myPath = cmd.substr(5,cmd.size()-1).c_str();
+		if (stat(myPath, &buf) == 0) {
+			cout << "(TRUE)" << endl;
+			return true;
+		}
+		else {
+			cout << "(FALSE)" << endl;
+			return false;
+		}
+	}
+	return true;
+}
