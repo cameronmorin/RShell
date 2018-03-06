@@ -14,12 +14,14 @@ In my code, I found a couple minor bugs:
 1) If the user inputs a test function style input, but does
    not give appropriate syntax, there may be some error 
    depending on the exact input due to very strict
-   string parsing
+   string parsing.
 
 2) In some instances with uneven precedence operators, there was segmentation
    faults but I have found and fixed all known instances.
 
-
+3) My scripts sometime malfunction when I call them, but
+   all of the individual cases within the scripts have been
+   tested and all work to my correctness.
 
 My partner withdrew from the class in the middle of week 8, so the 
 remainder of the assignments will be completed by myself only.
