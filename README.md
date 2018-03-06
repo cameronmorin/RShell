@@ -24,4 +24,4 @@ In my code, I found a couple minor bugs:
 My partner withdrew from the class in the middle of week 8, so the 
 remainder of the assignments will be completed by myself only.
 
-##Cameron Morin
+## Cameron Morin
