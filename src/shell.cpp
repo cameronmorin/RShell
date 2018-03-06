@@ -74,8 +74,17 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 	//Convert all test calls to the "test" style
 	for (unsigned i = 0; i < commands.size(); ++i) {
 		if (commands.at(i).at(0) == '[') {
+			if (commands.at(i).at(1) != ' ') {
+				commands.at(i).insert(1, " ");
+			}
 			commands.at(i).replace(0,1, "test");
-			commands.at(i).resize(commands.at(i).size() - 2);
+			
+			if (commands.at(i).at(commands.at(i).size() - 2) != ' ') {
+				commands.at(i).resize(commands.at(i).size() - 1);
+			}
+			else {
+				commands.at(i).resize(commands.at(i).size() - 2);
+			}
 		}
 	}
 
