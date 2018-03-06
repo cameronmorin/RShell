@@ -1,7 +1,21 @@
-# assignment2
+# assignment3
 
-In this assignment, please finish two things:
+In this assignment, I implemented the precedence operators and the new test function
 
-1 In "CS100_Assignment1.pdf", finish setting up your “Assignment” github repo, and writing an epic for assignment 2.
+The test function returns true if the input file/directory exists,is a file, or is a directory
+depending on the flag given(if there was a flag given).
 
-2 Finish everything mentioned in "CS100_Assignment2.pdf".
+The precedence operators allow for more direct, and accurate computation
+of boolean logic, allowing for commands to be broken up into
+their desired branches of logic.
+
+In my code, I found a couple minor bugs:
+
+1: If the user inputs a test function style input, but does
+   not give appropriate syntax, there may be some error 
+   depending on the exact input due to very strict
+   string parsing
+
+2: In some instances with uneven precedence operators, there was segmentation
+   faults but I have found and fixed all known instances.
+
