@@ -76,7 +76,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 	
 	//FIXME
 	for (unsigned i = 0; i < commands.size(); ++i) {
-		cout << commands.at(i) << "<---" << endl;
+		cout << commands.at(i) << "XXX" << endl;
 	}
 	return;
 	//FIXME
@@ -133,6 +133,22 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 		else if (commands.at(i) == ")") {
 			rightPrecedence* right = new rightPrecedence();
 			inputVector.push_back(right);
+		}
+		else if (commands.at(i) == "|") {
+			pipeConnector* pipe = new pipeConnector();
+			inputVector.push_back(pipe);
+		}
+		else if (commands.at(i) == "<") {
+			inputRedirect* in = new inputRedirect();
+			inputVector.push_back(in);
+		}
+		else if (commands.at(i) == ">") {
+			singleOutput* sin = new singleOutput();
+			inputVector.push_back(sin);
+		}
+		else if (commands.at(i) == ">>") {
+			doubleOutput* dub = new doubleOutput();
+			inputVector.push_back(dub);
 		}
         else {
             command* cmd = new command(commands.at(i));
