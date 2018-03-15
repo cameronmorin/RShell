@@ -52,6 +52,16 @@ void ANDConnector::setRightChild(Base* right) {
 	return;
 }
 
+void pipeConnector::setLeftChild(Base* left) {
+	this->lhs = left;
+	return;
+}
+
+void pipeConnector::setRightChild(Base* right) {
+	this->rhs = right;
+	return;
+}
+
 void leftPrecedence::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a precedence operator" << endl;
 	return;
@@ -112,6 +122,12 @@ int ANDConnector::evaluate() {
         return temp;
     }
 
+}
+
+int pipeConnector::evaluate() {
+	//FIXME
+	//Implement dup() and pip() calls here
+	return 1;
 }
 
 int command::evaluate() {

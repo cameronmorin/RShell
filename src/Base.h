@@ -127,6 +127,27 @@ class ANDConnector : public Base {
 		void setLeftChild(Base* left);
 };
 
+class pipeConnector : public Base {
+	private:
+		Base* lhs;
+		Base* rhs;
+	
+	public:
+		int evaluate();
+
+		bool isConnector() { return true;}
+
+		bool isLeftP() { return false;}
+
+		bool isRightP() { return false;}
+
+		int getPriority() { return 4;}
+
+		void setRightChild(Base* right);
+
+		void setLeftChild(Base* left);
+};
+
 class leftPrecedence : public Base {
 	public:
 		int evaluate() { return 0;}
