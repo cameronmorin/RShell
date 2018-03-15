@@ -62,6 +62,36 @@ void pipeConnector::setRightChild(Base* right) {
 	return;
 }
 
+void inputRedirect::setLeftChild(Base* left) {
+	this->lhs = left;
+	return;
+}
+
+void inputRedirect::setRightChild(Base* right) {
+	this->rhs = right;
+	return;
+}
+
+void singleOutput::setLeftChild(Base* left) {
+	this->lhs = left;
+	return;
+}
+
+void singleOutput::setRightChild(Base* right) {
+	this->rhs = right;
+	return;
+}
+
+void doubleOutput::setLeftChild(Base* left) {
+	this->lhs = left;
+	return;
+}
+
+void doubleOutput::setRightChild(Base* right) {
+	this->rhs = right;
+	return;
+}
+
 void leftPrecedence::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a precedence operator" << endl;
 	return;
@@ -125,6 +155,24 @@ int ANDConnector::evaluate() {
 }
 
 int pipeConnector::evaluate() {
+	//FIXME
+	//Implement dup() and pip() calls here
+	return 1;
+}
+
+int inputRedirect::evaluate() {
+	//FIXME
+	//Implement dup() and pip() calls here
+	return 1;
+}
+
+int singleOutput::evaluate() {
+	//FIXME
+	//Implement dup() and pip() calls here
+	return 1;
+}
+
+int doubleOutput::evaluate() {
 	//FIXME
 	//Implement dup() and pip() calls here
 	return 1;
