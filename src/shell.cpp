@@ -24,13 +24,15 @@ void shell::run() {
 
         convertInput(UserInput, commands, inputVector);
 
+
+        root = buildTree(inputVector);
+
 		//FIXME
 		//This is here for testing purposes only
 		//Please delete the following line:
 		exit(1);
-
-        root = buildTree(inputVector);
-		
+		//FIXME
+			
 		//Check for uneven amount of precedence operators
 		if (root == 0) {
 			cout << "Entered uneven amount of precedence operators. Please try again" << endl;
@@ -74,12 +76,6 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 		}
     }
 	
-	//FIXME
-	for (unsigned i = 0; i < commands.size(); ++i) {
-		cout << commands.at(i) << "XXX" << endl;
-	}
-	return;
-	//FIXME
 
 
 	//Convert all test calls to the "test" style
@@ -222,6 +218,7 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		connectorStack.pop();
 	}
 
+
 	// ReversePolishNotation Vector built above
 	// Now build the tree
 	stack<Base*> Tree;
@@ -240,9 +237,3 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 	return Tree.top();	
 }
 
-/* for future implementation
-int shell::priority(Base* connector) {
-	//FIXME
-	return 0;
-}
-*/
