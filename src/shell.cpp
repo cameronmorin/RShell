@@ -77,7 +77,12 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 				commands.at(i).insert(1, " ");
 			}
 			commands.at(i).replace(0,1, "test");
-			
+		
+			while(commands.at(i).at(commands.at(i).size() - 1) == ' ' || commands.at(i).at(commands.at(i).size() - 1) == ']') {
+				commands.at(i).pop_back();
+			}
+
+		/*	
 			if (commands.at(i).at(commands.at(i).size() - 2) != ' ') {
 				commands.at(i).resize(commands.at(i).size() - 1);
 				if (commands.at(i).at(commands.at(i).size() - 1) == ']') {
@@ -90,6 +95,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 			else {
 				commands.at(i).resize(commands.at(i).size() - 2);
 			}
+		*/
 		}
 	}
 
