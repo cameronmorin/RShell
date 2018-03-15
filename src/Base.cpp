@@ -11,11 +11,13 @@ using namespace std;
 
 void command::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a command" << endl << endl;
+	throw invalid_argument("Tried setting child to a command node");
 	return;
 }
 
 void command::setRightChild(Base* right) {
 	cout << "ERROR: Tried setting a child to a command" << endl << endl;
+	throw invalid_argument("Tried setting child to a command node");
 	return;
 }
 
@@ -94,21 +96,25 @@ void doubleOutput::setRightChild(Base* right) {
 
 void leftPrecedence::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a precedence operator" << endl;
+	throw invalid_argument("Tried setting child to a precedence operator");
 	return;
 }
 
 void leftPrecedence::setRightChild(Base* right) {
 	cout << "ERROR: Tried setting a child to a precedence operator" << endl;
+	throw invalid_argument("Tried setting child to a precedence operator");
 	return;
 }
 
 void rightPrecedence::setLeftChild(Base* left) {
 	cout << "ERROR: Tried setting a child to a precedence operator";
+	throw invalid_argument("Tried setting child to a precedence operator");
 	return;
 }
 
 void rightPrecedence::setRightChild(Base* right) {
 	cout << "ERROR: Tried setting a child to a precedence operator";
+	throw invalid_argument("Tried setting child to a precedence operator");
 	return;
 }
 
