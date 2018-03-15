@@ -130,10 +130,21 @@ int pipeConnector::evaluate() {
 	return 1;
 }
 
+void command::echoHelp(string& commandString) {
+	if (commandString.substr(0,4) == "echo") {
+		if (commandString.substr(5,1) == "\"") {
+			cout << "Found the quotation marks." << endl;
+			cout << "FIXME:: Need to finish echo implementation later." << endl;
+		}
+	}
+}
+
 int command::evaluate() {
 
     // used for long listed commands spaced out
     vector<string> v = parseCommand(commandString);
+	
+	echoHelp(commandString);	
 
     // cases for exiting the shell
     if (commandString == "exit") {
