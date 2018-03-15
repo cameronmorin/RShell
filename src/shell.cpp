@@ -24,6 +24,11 @@ void shell::run() {
 
         convertInput(UserInput, commands, inputVector);
 
+		//FIXME
+		//This is here for testing purposes only
+		//Please delete the following line:
+		exit(1);
+
         root = buildTree(inputVector);
 		
 		//Check for uneven amount of precedence operators
@@ -48,7 +53,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
     vector<string> v;
 
     // regular expression to parse through the user input
-    regex reg1("(;|\\|{2}|&{2}|#|\\)|\\()|([^\\s][^;|\\|{2}|&{2}|#|\\)|\\(]*)"); 
+    regex reg1("(;|\\|{2}|&{2}|#|\\)|\\(|\\|{1})|([^\\s][^;|\\|{2}|&{2}|#|\\)|\\(|\\|{1}]*)"); 
     regex_token_iterator<string::iterator> it{UserInput.begin(), UserInput.end(), reg1};
     regex_token_iterator<string::iterator> rit;
 
@@ -66,8 +71,16 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
         }
         else {
             commands.push_back(v.at(i));
-        }
+		}
     }
+	
+	//FIXME
+	for (unsigned i = 0; i < commands.size(); ++i) {
+		cout << commands.at(i) << "<---" << endl;
+	}
+	return;
+	//FIXME
+
 
 	//Convert all test calls to the "test" style
 	for (unsigned i = 0; i < commands.size(); ++i) {
