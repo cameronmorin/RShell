@@ -33,6 +33,9 @@ class Base {
 
 		//Universal test function
 		bool test(const string &cmd);
+
+		//Output function used for testing purposes
+		virtual void printString() = 0;
 };
 
 class command : public Base {
@@ -57,6 +60,8 @@ class command : public Base {
 	void setLeftChild(Base* left);
 
 	void setRightChild(Base* right);
+
+	void printString() { cout << commandString << endl;}
 
     // helper functions
     private:
@@ -83,6 +88,7 @@ class semiColonConnector : public Base {
 		void setLeftChild(Base* left);
 
 		void setRightChild(Base* right);
+		void printString() { cout << ";" << endl;}
 };
 
 class orConnector : public Base {
@@ -104,6 +110,7 @@ class orConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "||" << endl;}
 };
 
 class ANDConnector : public Base {
@@ -125,6 +132,7 @@ class ANDConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "&&" << endl;}
 };
 
 class pipeConnector : public Base {
@@ -146,6 +154,7 @@ class pipeConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "|" << endl;}
 };
 
 class inputRedirect : public Base {
@@ -167,6 +176,7 @@ class inputRedirect : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << ">" << endl;}
 };
 
 class singleOutput : public Base {
@@ -188,6 +198,7 @@ class singleOutput : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "<" << endl;}
 };
 
 class doubleOutput : public Base {
@@ -209,6 +220,7 @@ class doubleOutput : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "<<" << endl;}
 };
 
 class leftPrecedence : public Base {
@@ -226,6 +238,7 @@ class leftPrecedence : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << "(" << endl;}
 };
 
 class rightPrecedence : public Base {
@@ -243,6 +256,7 @@ class rightPrecedence : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
+		void printString() { cout << ")" << endl;}
 };
 
 #endif // __BASE_H__
