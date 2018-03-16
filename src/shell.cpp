@@ -231,7 +231,6 @@ Base* shell::buildTree(vector<Base*> inputVector) {
 		Tree.push(reversePolish.at(j));
 	}
 	
-
 	return Tree.top();	
 }
 
