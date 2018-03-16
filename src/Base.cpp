@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <cstdlib>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -167,8 +169,50 @@ int pipeConnector::evaluate() {
 }
 
 int inputRedirect::evaluate() {
-	//FIXME
-	//Implement dup() and pip() calls here
+	int in;
+	pid_t pid;
+	int statVal;
+	
+	string right = this->rhs->getString();
+	const char* chP = right.c_str();
+	pid = fork();
+	
+	if (!pid) {
+		in = open(chP, O_RDONLY);
+		if (in == -1) {
+			perror("open");
+			exit(EXIT_FAILURE);
+			return 0;	
+		}
+		if (dup2(in,0) == -1) {
+			perror("dup2");
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		if (close(in) == -1) {
+			perror("close");
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		if (lhs->evaluate() == 0) {
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		
+		exit(EXIT_SUCCESS);	
+	} 
+	else if (pid < 0) {
+		perror("fork");
+		exit(EXIT_FAILURE);
+		return 0;
+	}
+	else {
+		do {
+			waitpid(pid, &statVal, 0);
+		} while (!WIFEXITED(statVal));
+	}
+	
+	
 	return 1;
 }
 

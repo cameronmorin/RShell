@@ -181,7 +181,7 @@ class inputRedirect : public Base {
 
 		void setLeftChild(Base* left);
 		
-		string getString() { return ">";}
+		string getString() { return "<";}
 };
 
 class singleOutput : public Base {
@@ -204,7 +204,7 @@ class singleOutput : public Base {
 
 		void setLeftChild(Base* left);
 		
-		string getString() { return "<";}
+		string getString() { return ">";}
 };
 
 class doubleOutput : public Base {
@@ -227,7 +227,7 @@ class doubleOutput : public Base {
 
 		void setLeftChild(Base* left);
 		
-		string getString() { return "<<";}
+		string getString() { return ">>";}
 };
 
 class leftPrecedence : public Base {
