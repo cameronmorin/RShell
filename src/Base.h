@@ -35,7 +35,7 @@ class Base {
 		bool test(const string &cmd);
 
 		//Output function used for testing purposes
-		virtual void printString() = 0;
+		virtual string getString() = 0;
 };
 
 class command : public Base {
@@ -43,27 +43,27 @@ class command : public Base {
         string commandString;
 
     public:
-    // constructors
-    command() : commandString() { }
-    command(string cmd) : commandString(cmd) { }
+    	// constructors
+    	command() : commandString() { }
+    	command(string cmd) : commandString(cmd) { }
 
-    int evaluate();
+    	int evaluate();
 
-    bool isConnector() { return false;}
+    	bool isConnector() { return false;}
 
-	bool isLeftP() { return false;}
+		bool isLeftP() { return false;}
 
-	bool isRightP() { return false;}
+		bool isRightP() { return false;}
 
-	int getPriority() { return 0;}
+		int getPriority() { return 0;}
 
-	void setLeftChild(Base* left);
+		void setLeftChild(Base* left);
 
-	void setRightChild(Base* right);
+		void setRightChild(Base* right);
 
-	void printString() { cout << commandString << endl;}
+		string getString() { return commandString;}
 
-    // helper functions
+    	// helper functions
     private:
         vector<string> parseCommand(string s);
 		void echoHelp(string&);
@@ -88,7 +88,8 @@ class semiColonConnector : public Base {
 		void setLeftChild(Base* left);
 
 		void setRightChild(Base* right);
-		void printString() { cout << ";" << endl;}
+		
+		string getString() { return ";";}
 };
 
 class orConnector : public Base {
@@ -110,7 +111,8 @@ class orConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "||" << endl;}
+		
+		string getString() { return "||";}
 };
 
 class ANDConnector : public Base {
@@ -132,7 +134,8 @@ class ANDConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "&&" << endl;}
+		
+		string getString() { return "&&";}
 };
 
 class pipeConnector : public Base {
@@ -154,7 +157,8 @@ class pipeConnector : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "|" << endl;}
+		
+		string getString() { return "|";}
 };
 
 class inputRedirect : public Base {
@@ -176,7 +180,8 @@ class inputRedirect : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << ">" << endl;}
+		
+		string getString() { return ">";}
 };
 
 class singleOutput : public Base {
@@ -198,7 +203,8 @@ class singleOutput : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "<" << endl;}
+		
+		string getString() { return "<";}
 };
 
 class doubleOutput : public Base {
@@ -220,7 +226,8 @@ class doubleOutput : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "<<" << endl;}
+		
+		string getString() { return "<<";}
 };
 
 class leftPrecedence : public Base {
@@ -238,7 +245,8 @@ class leftPrecedence : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << "(" << endl;}
+		
+		string getString() { return "(";}
 };
 
 class rightPrecedence : public Base {
@@ -256,7 +264,8 @@ class rightPrecedence : public Base {
 		void setRightChild(Base* right);
 
 		void setLeftChild(Base* left);
-		void printString() { cout << ")" << endl;}
+		
+		string getString() { return ")";}
 };
 
 #endif // __BASE_H__
