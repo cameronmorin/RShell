@@ -270,9 +270,53 @@ int singleOutput::evaluate() {
 }
 
 int doubleOutput::evaluate() {
-	//FIXME
-	//Implement dup() and pip() calls here
-	return 1;
+	int out;
+	pid_t pid;
+	int statVal;
+	string right = this->rhs->getString();
+	const char* chP = right.c_str();
+
+	pid = fork();
+	if (!pid) {
+		out = open(chP, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		
+		if (out == -1) {
+			perror("open");
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		if (dup2(out, 1) == -1) {
+			perror("dup2");
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		if (lhs->evaluate() == 0) {
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		if (close(out) == -1) {
+			perror("close");
+			exit(EXIT_FAILURE);
+			return 0;
+		}
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid < 0) {
+		perror("fork");
+		exit(EXIT_FAILURE);
+		return 0;
+	}
+	else {
+		do {
+			waitpid(pid, &statVal, 0);
+		} while (!WIFEXITED(statVal));
+	}
+	
+	if (!WEXITSTATUS(statVal)) {
+		return 1;
+	}
+
+	return 0;
 }
 
 void command::echoHelp(string& commandString) {
