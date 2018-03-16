@@ -24,7 +24,6 @@ void shell::run() {
 
         convertInput(UserInput, commands, inputVector);
 
-
         root = buildTree(inputVector);
 
 		//Check for uneven amount of precedence operators
@@ -101,6 +100,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 		*/
 		}
 	}
+
 
     // go through and convert all inputs into base pointers
     for (unsigned i = 0; i < commands.size(); ++i) {
