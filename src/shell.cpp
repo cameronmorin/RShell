@@ -27,12 +27,6 @@ void shell::run() {
 
         root = buildTree(inputVector);
 
-		//FIXME
-		//This is here for testing purposes only
-		//Please delete the following line:
-		exit(1);
-		//FIXME
-			
 		//Check for uneven amount of precedence operators
 		if (root == 0) {
 			cout << "Entered uneven amount of precedence operators. Please try again" << endl;
