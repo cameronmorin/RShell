@@ -211,9 +211,12 @@ int inputRedirect::evaluate() {
 			waitpid(pid, &statVal, 0);
 		} while (!WIFEXITED(statVal));
 	}
+
+	if (!WEXITSTATUS(statVal)) {
+		return 1;
+	}	
 	
-	
-	return 1;
+	return 0;
 }
 
 int singleOutput::evaluate() {
