@@ -147,10 +147,14 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 			inputVector.push_back(dub);
 		}
         else {
+			while (commands.at(i).at(commands.at(i).size() - 1) == ' ') {
+				commands.at(i).pop_back();
+			}
             command* cmd = new command(commands.at(i));
             inputVector.push_back(cmd);
         }
     }
+
 }
 
 
