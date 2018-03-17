@@ -24,6 +24,7 @@ void shell::run() {
 
         convertInput(UserInput, commands, inputVector);
 
+
         root = buildTree(inputVector);
 
 		//Check for uneven amount of precedence operators
