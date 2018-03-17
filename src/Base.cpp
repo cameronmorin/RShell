@@ -163,9 +163,82 @@ int ANDConnector::evaluate() {
 }
 
 int pipeConnector::evaluate() {
-	//FIXME
-	//Implement dup() and pip() calls here
-	return 1;
+	int pipefd[2];
+	pid_t cpid1, cpid2;
+	int statVal;
+
+	if (pipe(pipefd) == -1) {
+		perror("pipe");
+		exit(EXIT_FAILURE);
+		return 0;
+	}
+
+	cpid1 = fork();
+	if (cpid1 < 0) {
+		perror("fork");
+		return 0;
+	}
+
+	if (cpid1 == 0) {
+		cpid2 = fork();
+		if (cpid2 == 0) {
+			if (dup2(pipefd[0], 0) == -1) {
+				perror("dup2");
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			if (close(pipefd[1]) == -1) {
+				perror("close");
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			if (rhs->evaluate() == 0) {
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			exit(EXIT_SUCCESS);
+		}
+		else if (cpid2 < 0) {
+			perror("fork");
+			return 0;
+		}
+		else {
+			if (dup2(pipefd[1], 1) == -1) {
+				perror("dup2");
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			if (close(pipefd[1]) == -1) {
+				perror("close");
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			if (lhs->evaluate() == 0) {
+				exit(EXIT_FAILURE);
+				return 0;
+			}
+			exit(EXIT_SUCCESS);
+		}
+	}
+
+	if (close(pipefd[0]) == -1) {
+		perror("close");
+		return 0;
+	}
+	if (close(pipefd[1]) == -1) {
+		perror("close");
+		return 0;
+	}
+
+	do {
+		waitpid(cpid1, &statVal, 0);
+	} while (!WIFEXITED(statVal));
+
+	if (!WEXITSTATUS(statVal)) {
+		return 1;
+	}
+
+	return 0;
 }
 
 int inputRedirect::evaluate() {
