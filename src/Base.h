@@ -66,7 +66,6 @@ class command : public Base {
     	// helper functions
     private:
         vector<string> parseCommand(string s);
-		void echoHelp(string&);
 };
 
 class semiColonConnector : public Base {

@@ -392,21 +392,11 @@ int doubleOutput::evaluate() {
 	return 0;
 }
 
-void command::echoHelp(string& commandString) {
-	if (commandString.substr(0,4) == "echo") {
-		if (commandString.substr(5,1) == "\"") {
-			cout << "Found the quotation marks." << endl;
-			cout << "FIXME:: Need to finish echo implementation later." << endl;
-		}
-	}
-}
 
 int command::evaluate() {
 
     // used for long listed commands spaced out
     vector<string> v = parseCommand(commandString);
-	
-	echoHelp(commandString);	
 
     // cases for exiting the shell
     if (commandString == "exit") {
@@ -432,6 +422,7 @@ int command::evaluate() {
 			return 0;
 		}
 	}
+	
 
 
     pid_t pid = fork();
@@ -443,7 +434,7 @@ int command::evaluate() {
     args[v.size()] = 0;
     
     for (unsigned i = 0; i < v.size(); ++i) {
-        args[i] = (char*)v.at(i).c_str();
+		args[i] = (char*)v.at(i).c_str();
     }
     // forking test cases
     if (pid < 0) {
@@ -478,7 +469,7 @@ vector<string> command::parseCommand(string s) {
 
     while (it != rit) {
         v.push_back(*it);
-        ++it;
+		++it;
     }
 
     return v;

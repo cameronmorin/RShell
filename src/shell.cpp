@@ -146,7 +146,7 @@ void shell::convertInput(string UserInput, vector<string>& commands, vector<Base
 				commands.at(i).pop_back();
 			}
             command* cmd = new command(commands.at(i));
-            inputVector.push_back(cmd);
+			inputVector.push_back(cmd);
         }
     }
 
